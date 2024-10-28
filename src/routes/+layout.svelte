@@ -8,8 +8,8 @@
 </head>
 
 <nav>
-    <a href="/">Home</a>
-    <a href="/profile">Profile</a>
+    <a href="/" > <img src="home_icon.svg" alt="home icon"> </a>
+    <a href="/profile"> <img src="profile_icon.svg" alt=""></a>
 </nav>
 
 <slot />
@@ -21,6 +21,8 @@
         border-radius: 5px;
     }
     a{
+        justify-content: center;
+        align-items: center;
         padding: 7px 7px 7px 7px;
         border-radius: 5px;
         margin: 5px 5px 5px 5px;
@@ -31,7 +33,7 @@
         background-color: var(--secondary-800);
         color: var(--text-100);
     }
-    :global(p, h1, a, div,h2,h3) {
+    :global(p, h1, a, div,h2,h3,button,input) {
         font-family: "Poppins", sans-serif;
         font-weight: 400;
         font-style: normal;
