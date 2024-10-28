@@ -10,6 +10,7 @@
 <nav>
     <a href="/" > <img src="home_icon.svg" alt="home icon"> </a>
     <a href="/profile"> <img src="profile_icon.svg" alt=""></a>
+    <a href="/login">Log in</a>
 </nav>
 
 <slot />

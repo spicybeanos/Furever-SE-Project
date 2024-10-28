@@ -1,7 +1,7 @@
 import { resolveConfig } from 'vite';
 import type { Actions } from './$types';
 
-const login_server_address = "127.0.0.1:5060/login";
+const login_server_address = "http://localhost:3000/login";
 
 export const actions = {
 	login: async (event) => {
@@ -11,8 +11,8 @@ export const actions = {
 		const password = data.get('password');
 
 		try {
-			const resp = await event.fetch(login_server_address, {
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+			const resp = await fetch(login_server_address, {
+				headers: { 'Content-Type': 'application/json' },
 				method: "POST",
 				body: JSON.stringify({
 					action: "login",
@@ -21,8 +21,10 @@ export const actions = {
 				})
 			});
 			if (!resp.ok) {
+				console.log("reponse not ok:"+resp.status)
 				return { success: false, error: "Failed to log in! Username or password incorrect!" };
 			}
+			console.log("response ok");
 			const data = await resp.json();
 			console.log("got fetch response:\n" + data);
 		}
