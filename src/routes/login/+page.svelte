@@ -1,9 +1,17 @@
 <script>
     export let form;
+    import { goto } from "$app/navigation";
+
+    function onFormCompleted() {
+        document.cookie = `uuid=${form?.id};path=/`;
+        //goto("/");
+        return "";
+    }
 </script>
 
-<h1>Log in</h1>
+{#if !form?.success}
 <form method="POST" action="?/login">
+    <h1>Log in</h1>
     <input
         class="text"
         type="text"
@@ -19,12 +27,30 @@
         placeholder="password"
     />
     <button>Log in</button>
-    <button formaction="?/register">Register</button>
-
-    {#if form?.success}
-        <p>Success:{form?.msg}</p>
-    {/if}
 </form>
+<form method="POST" action="?/register">
+    <h1>Register</h1>
+    <input
+        class="text"
+        type="text"
+        name="username"
+        id="user"
+        placeholder="username"
+    />
+    <input
+        class="text"
+        type="password"
+        name="password"
+        id="pass"
+        placeholder="password"
+    />
+    <button>Register</button>
+</form>
+{/if}
+{#if form?.success}
+    <p>Success:{form?.msg}</p>
+    <div>Go to home page</div>
+{/if}
 
 <style>
     .text {
