@@ -1,5 +1,4 @@
 <script>
-    export let data;
     export let form;
 </script>
 
@@ -23,7 +22,7 @@
     <button formaction="?/register">Register</button>
 
     {#if form?.success}
-        <p>Logged in succesfully!</p>
+        <p>Success:{form?.msg}</p>
     {/if}
 </form>
 

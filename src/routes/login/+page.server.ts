@@ -21,15 +21,16 @@ export const actions = {
 				})
 			});
 			if (!resp.ok) {
-				console.log("reponse not ok:"+resp.status)
+				const _err = await resp.json();
+				console.log("reponse not ok:" + resp.status + ":" + _err.error)
 				return { success: false, error: "Failed to log in! Username or password incorrect!" };
 			}
 			console.log("response ok");
 			const data = await resp.json();
-			console.log("got fetch response:\n" + data);
+			return {success:true,msg:"Login success!" + data.UUID}
 		}
 		catch (exc) {
-			console.log("could not connect to auth server!!\n"+exc);
+			console.log("could not connect to auth server!!\n" + exc);
 			return { success: false, error: "Could not connect to auth server!" }
 		}
 	},
@@ -37,14 +38,30 @@ export const actions = {
 		const data = await event.request.formData();
 		const username = data.get('username');
 		const password = data.get('password');
-
-		const resp = await fetch(login_server_address, {
-			method: "POST",
-			body: JSON.stringify({
-				action: "register",
-				user: username,
-				pass: password
+		console.log("registering : "+username + ", "+password);
+		try {
+			const resp = await fetch(login_server_address, {
+				headers: { 'Content-Type': 'application/json' },
+				method: "POST",
+				body: JSON.stringify({
+					action: "register",
+					user: username,
+					pass: password
+				})
 			})
-		})
+
+			const body = await resp.json()
+			if(resp.ok === false){
+				console.log("Registering failed!:"+resp.status+":"+body.error)
+				return {success:false,error:"Registering failed!:"+resp.status+":"+body.error}
+			}
+			const data = await resp.json()
+			if(resp.status === 200)
+				return {success:true,msg:"Registered successfully!"+data.UUID}
+		}
+		catch(exc){
+			console.log("could not connect to auth server!!\n" + exc);
+			return { success: false, error: "Could not connect to auth server!" }
+		}
 	}
 } satisfies Actions;
