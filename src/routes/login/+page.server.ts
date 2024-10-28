@@ -25,7 +25,7 @@ export const actions = {
 				return { success: false, error: "Failed to log in! Username or password incorrect!"+_err.error };
 			}
 			const data = await resp.json();
-			return {success:true,msg:"Login success!" + data.UUID,id:data.UUID}
+			return {success:true,msg:"Login success!" + data.UUID,id:data.UUID,user:data.username}
 		}
 		catch (exc) {
 			return { success: false, error: "Could not connect to auth server!" }
@@ -52,7 +52,7 @@ export const actions = {
 			}
 			const data = await resp.json()
 			if(resp.status === 200)
-				return {success:true,msg:"Registered successfully!"+data.UUID,id:data.UUID}
+				return {success:true,msg:"Registered successfully!"+data.UUID,id:data.UUID,user:data.username}
 		}
 		catch(exc){
 			console.log("could not connect to auth server!!\n" + exc);

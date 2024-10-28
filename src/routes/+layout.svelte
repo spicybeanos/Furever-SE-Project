@@ -8,8 +8,8 @@
 </head>
 
 <nav>
-    <a href="/" > <img src="home_icon.svg" alt="home icon"> </a>
-    <a href="/profile"> <img src="profile_icon.svg" alt=""></a>
+    <a href="/" > Home </a>
+    <a href="/profile/me"> Profile</a>
     <a href="/login">Log in</a>
 </nav>
 
